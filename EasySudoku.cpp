@@ -4,12 +4,14 @@
 int Sudoku::easySudoku1(){
 
 const int rows = 15;
-const int columns = 14;
+const int columns = 15;
 
 cout << "          Easy Puzzle 1            " << endl;
 cout << "" << endl;
+//HANDLE h = GetStdHandle( STD_OUTPUT_HANDLE );
+//SetConsoleTextAttribute(h, FOREGROUND_BLUE | FOREGROUND_INTENSITY );
 
-  /*  string sudokuEasy1 [rows][columns] =
+   string sudokuEasy1 [rows][columns] =
     {
             {" ", " ", " ", "A", "B", "C", " ", "D", "E", "F", " ", "G", "H", "I", " "},
             {" ", " ", "+", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "+"},
@@ -26,7 +28,7 @@ cout << "" << endl;
             {" ", "9", "|", " ", " ", " ", "|", " ", " ", "2", "|", " ", "6", "1", "|"},
             {" ", " ", "+", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "+"},
     };
-*/
+//SetConsoleTextAttribute(h, 0XF | FOREGROUND_INTENSITY );
     string sudokuEasy1Sol [rows][columns] =
     {
             {" ", " ", " ", "A", "B", "C", " ", "D", "E", "F", " ", "G", "H", "I", " "},
@@ -44,7 +46,7 @@ cout << "" << endl;
             {" ", "9", "|", "4", "7", "3", "|", "8", "9", "2", "|", "5", "6", "1", "|"},
             {" ", " ", "+", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "+"},
     };
-
+/*
     string sudokuEasy1 [rows][columns] =
 
     {
@@ -63,7 +65,17 @@ cout << "" << endl;
             {" ", "9", "|", "4", "7", "3", "|", "8", "9", "2", "|", "5", "6", "1", "|"},
             {" ", " ", "+", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "+"},
     };
+*/
+for(int i =0; i < 15; i++){
+  for(int j = 0; j < 15; j++){
 
+      if (sudokuEasy1[i][j] != " "){
+        sudokuEasy1[i][j] = sudokuEasy1[i][j];
+      }
+  }
+}
+
+//SetConsoleTextAttribute(h, FOREGROUND_BLUE | FOREGROUND_INTENSITY );
     for(int i=0; i < 15; i++){
 
         for(int j=0; j < 15; j++) {
@@ -74,9 +86,38 @@ cout << "" << endl;
     }
 
 while(sudokuEasy1 != sudokuEasy1Sol){
-cout << "Please Enter the Letter Position of the Grid in which you would like to fill a value: ";
+cout << "Please Enter the Letter and Number Position of the Grid in which you would like to fill a value (Ex: A5): ";
 char letterValue;
-cin >> letterValue;
+int numberValue;
+cin >> letterValue >> numberValue;
+/*
+char alphabet [9] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'};
+int numbers [9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+for(int i = 0; i < 9; i++){
+
+    if(letterValue == alphabet[i]){
+        break;
+    }
+
+    else{
+      cout << "Invalid arg" << endl;
+    }
+
+}
+
+for (int i =0; i < 9; i++){
+
+    if(numberValue != numbers[i]){
+      cout << "Invalid num" << endl;
+      break;
+    }
+
+}
+
+*/
+string position = letterValue + to_string(numberValue);
+//cout << position;
 
 int myLetterVal = (int)letterValue;
 
@@ -111,11 +152,6 @@ else {
   cout << "Error Invalid Letter" << endl;
 }
 
-cout << "";
-cout << "Please Enter the Number Position of the Grid in which you would like to fill a value: ";
-int numberValue;
-cin >> numberValue;
-
 if (numberValue >= 1 && numberValue <=3){
 
     numberValue = numberValue + 1;
@@ -133,6 +169,29 @@ else {
   cout << "Error Invalid Number" << endl;
 }
 
+vector<string> checker;
+
+checker.push_back("A1"); checker.push_back("A5"); checker.push_back("B1"); checker.push_back("B2");
+checker.push_back("B4"); checker.push_back("B6"); checker.push_back("B8"); checker.push_back("C2");
+checker.push_back("C3"); checker.push_back("C4"); checker.push_back("C6"); checker.push_back("C7");
+checker.push_back("D1"); checker.push_back("D2"); checker.push_back("D8"); checker.push_back("E3");
+checker.push_back("E4"); checker.push_back("E6"); checker.push_back("E7"); checker.push_back("F2");
+checker.push_back("F8"); checker.push_back("F9"); checker.push_back("G3"); checker.push_back("G4");
+checker.push_back("G6"); checker.push_back("G7"); checker.push_back("G8"); checker.push_back("H2");
+checker.push_back("H4"); checker.push_back("H6"); checker.push_back("H8"); checker.push_back("H9");
+checker.push_back("I5"); checker.push_back("I9");
+
+for (unsigned int i = 0; i < checker.size(); i++){
+        if (position == checker[i]){
+          cout << "Error, unable to fill this spot." << endl;
+          break;
+        }
+
+        else{
+
+        }
+}
+
 cout << "";
 cout << "Please Enter the Sudoku number in the desired position: ";
 string sudokuValue;
@@ -140,54 +199,35 @@ cin >> sudokuValue;
 
 cout << "" << endl;
 
+
 sudokuEasy1[numberValue][myLetterVal] = sudokuValue;
 
+bool a = true;
 for(int i=0; i < 15; i++){
 
-    for(int j=0; j < 14; j++) {
+    for(int j=0; j < 15; j++) {
 
       cout << sudokuEasy1[i][j] << " ";
+      if(sudokuEasy1[i][j] == sudokuEasy1Sol[i][j]){
+
+      }
+
+      else {
+        a = false;
+      }
     }
     cout << endl;
     }
-    int counter=0;
-for(int K=0; K < 15; K++){
 
-    for(int X=0; X < 15; X++) {
-      int t=0;
+    if(a){
 
-
-      if(sudokuEasy1[K][X] == sudokuEasy1Sol[K][X]){
-        counter++;
-            return 0;
-      }
-      else{
-        cout << "You lose";
-        break;
-      }
+      cout << "Congratulations, you have completed this Easy Sudoku Puzzle!" << endl;
+      return 0;
     }
-    }
-if (counter == 225){
-  cout << "Congradulations, you have completed this Easy Sudoku Puzzle!" << endl;
-   //cout<<sudokuEasy1[K][X];
-   cout<<"\n";
-   cout<<"bbbb"<< sudokuEasy1Sol[6][6];
-}
 
-/*for(int i=0; i <= 15; i++){
-    for(int j=0; j <= 15; j++){
-
-      if(sudokuEasy1[i][j] == sudokuEasy1Sol[i][j]){
-          a = false;
-          cout << "Congradulations, you have completed this Easy Sudoku Puzzle!" << endl;
-      }
-      else
-        a = true;
+    else {}
 
     }
-    */
-
-}
 }
 
 
