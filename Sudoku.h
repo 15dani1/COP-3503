@@ -31,5 +31,17 @@ public:
 
     int hexaSudoku1();
 
+    int medSudoku1();
+
+    int medSudoku2();
+
+    int medSudoku3();
+
+    int hardSudoku1();
+
+    int hardSudoku2();
+
+    int hardSudoku3();
+
 };
 #endif
