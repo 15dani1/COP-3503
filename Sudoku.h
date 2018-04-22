@@ -27,6 +27,10 @@ public:
 
     int easySudoku1();
 
+    int easySudoku2();
+
+    int easySudoku3();
+
     int easySudokuMenu();
 
     int hexaSudoku1();
