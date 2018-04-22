@@ -9,6 +9,8 @@
 #include <cstring>
 #include <cstdlib>
 #include <cstddef>
+#include <Windows.h>
+#include <vector>
 using namespace std;
 
 class Sudoku{
@@ -24,5 +26,10 @@ public:
     int highScores();
 
     int easySudoku1();
+
+    int easySudokuMenu();
+
+    int hexaSudoku1();
+
 };
 #endif
