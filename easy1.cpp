@@ -1,8 +1,9 @@
-
+//Includes the Header File.
 #include "Sudoku.h"
 
+//Method for creating the sudoku grids.
 int Sudoku::easySudoku1(){
-
+//Matrix row and column values.
 const int rows = 15;
 const int columns = 15;
 
@@ -11,6 +12,7 @@ cout << "" << endl;
 //HANDLE h = GetStdHandle( STD_OUTPUT_HANDLE );
 //SetConsoleTextAttribute(h, FOREGROUND_BLUE | FOREGROUND_INTENSITY );
 
+//Initial Puzzle.
    string sudokuEasy1 [rows][columns] =
     {
             {" ", " ", " ", "A", "B", "C", " ", "D", "E", "F", " ", "G", "H", "I", " "},
@@ -29,6 +31,7 @@ cout << "" << endl;
             {" ", " ", "+", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "+"},
     };
 //SetConsoleTextAttribute(h, 0XF | FOREGROUND_INTENSITY );
+//Solved Grid.
     string sudokuEasy1Sol [rows][columns] =
     {
             {" ", " ", " ", "A", "B", "C", " ", "D", "E", "F", " ", "G", "H", "I", " "},
@@ -46,6 +49,7 @@ cout << "" << endl;
             {" ", "9", "|", "4", "7", "3", "|", "8", "9", "2", "|", "5", "6", "1", "|"},
             {" ", " ", "+", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "+"},
     };
+//Grid for the demo session.
 /*
     string sudokuEasy1 [rows][columns] =
 
@@ -66,6 +70,7 @@ cout << "" << endl;
             {" ", " ", "+", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "+"},
     };
 */
+//Checks if there are spaces and includes them.
 for(int i =0; i < 15; i++){
   for(int j = 0; j < 15; j++){
 
@@ -76,6 +81,7 @@ for(int i =0; i < 15; i++){
 }
 
 //SetConsoleTextAttribute(h, FOREGROUND_BLUE | FOREGROUND_INTENSITY );
+//Prints out the Unsolved Grid.
     for(int i=0; i < 15; i++){
 
         for(int j=0; j < 15; j++) {
@@ -85,10 +91,15 @@ for(int i =0; i < 15; i++){
         cout << endl;
     }
 
+//While loop that Runs the program until The unsolved and solved grids are the same.
 while(sudokuEasy1 != sudokuEasy1Sol){
+
+//Displays the prompt to the user.
 cout << "Please Enter the Letter and Number Position of the Grid in which you would like to fill a value (Ex: A5): ";
+
 char letterValue;
 int numberValue;
+//User Inputs a Letter and then a Number.
 cin >> letterValue >> numberValue;
 /*
 char alphabet [9] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'};
@@ -116,9 +127,10 @@ for (int i =0; i < 9; i++){
 }
 
 */
+//Checks to see if the inputted spot is a pre-configured number (Intital Grid).
 string position = letterValue + to_string(numberValue);
 //cout << position;
-
+//Convers Lettervalue to ascii to be positioned in the Grid.
 int myLetterVal = (int)letterValue;
 
 if(myLetterVal == 65){
@@ -148,10 +160,11 @@ else if(myLetterVal == 72){
 else if(myLetterVal == 73){
   myLetterVal = 13;
 }
+//Throws Error if the Letter is an out of bounds value.
 else {
   cout << "Error Invalid Letter" << endl;
 }
-
+//Checks if the Number is a value between 1 and 9, positions properly afterwards.
 if (numberValue >= 1 && numberValue <=3){
 
     numberValue = numberValue + 1;
@@ -169,6 +182,7 @@ else {
   cout << "Error Invalid Number" << endl;
 }
 
+//A vector is implemented to check for spots in the grid that the user cannot change.
 vector<string> checker;
 
 checker.push_back("A1"); checker.push_back("A5"); checker.push_back("B1"); checker.push_back("B2");
@@ -181,6 +195,7 @@ checker.push_back("G6"); checker.push_back("G7"); checker.push_back("G8"); check
 checker.push_back("H4"); checker.push_back("H6"); checker.push_back("H8"); checker.push_back("H9");
 checker.push_back("I5"); checker.push_back("I9");
 
+//If the position is restricted let user know that space is unable to fill.
 for (unsigned int i = 0; i < checker.size(); i++){
         if (position == checker[i]){
           cout << "Error, unable to fill this spot." << endl;
@@ -191,7 +206,7 @@ for (unsigned int i = 0; i < checker.size(); i++){
 
         }
 }
-
+//The user value gets inputted into the specific location.
 cout << "";
 cout << "Please Enter the Sudoku number in the desired position: ";
 string sudokuValue;
@@ -199,14 +214,16 @@ cin >> sudokuValue;
 
 cout << "" << endl;
 
-
+//The Inital Grid gets updated with the new values.
 sudokuEasy1[numberValue][myLetterVal] = sudokuValue;
 
+//Tests if the Solution Grid and the User Grid are identical and if they are, then the puzzle is complete.
 bool a = true;
 for(int i=0; i < 15; i++){
 
     for(int j=0; j < 15; j++) {
 
+      //Checks for equality.
       cout << sudokuEasy1[i][j] << " ";
       if(sudokuEasy1[i][j] == sudokuEasy1Sol[i][j]){
 
@@ -221,6 +238,7 @@ for(int i=0; i < 15; i++){
 
     if(a){
 
+      //Congratulates the User if they have successfully completed the puzzle.
       cout << "Congratulations, you have completed this Easy Sudoku Puzzle!" << endl;
       return 0;
     }
@@ -230,10 +248,12 @@ for(int i=0; i < 15; i++){
     }
 }
 
-
+//Main Method to run the code.
 
 int main(){
 
+  //Makes the Sudoku Object.
   Sudoku sudoku;
+  //Runs the Grid Method.
   sudoku.easySudoku1();
 }
